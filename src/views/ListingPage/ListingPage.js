@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { removeCountry } from '../../features/search/searchSlice';
-import SearchBar from '../../components/searchBar/SearchBar';
-import SortButton from '../../components/SortButton/SortButton'; // Import the SortButton component
-
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { removeCountry } from "../../features/search/searchSlice";
+import SearchBar from "../../components/searchBar/SearchBar";
+import SortButton from "../../components/sortButton/SortButton";
+import { useNavigate } from "react-router-dom";
+import "./style.css";
 const ListingPage = ({ data }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [sortedData, setSortedData] = useState([]);
   const [isAscending, setIsAscending] = useState(true);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const sorted = [...data].sort((a, b) => {
@@ -25,7 +27,7 @@ const ListingPage = ({ data }) => {
     setSortedData(sorted);
   }, [data, isAscending]);
 
-  const filteredData = sortedData.filter(item => 
+  const filteredData = sortedData.filter((item) =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -41,20 +43,37 @@ const ListingPage = ({ data }) => {
     setSearchQuery(query);
   };
 
+  const handleRedirect = (detailObject) => {
+    navigate("/detail", { state: { detailObject } });
+  };
+
   return (
-    <div>
+    <div className="mainContainer">
       <SearchBar onSearch={handleSearch} />
       {/* Render the SortButton component */}
       <SortButton onClick={toggleSorting} isAscending={isAscending} />
 
-      <ul>
+      <div className="listContainer">
         {filteredData.map((item, index) => (
-          <li key={item.name}>
-            <a href={item.web_pages[0]} target="_blank" rel="noopener noreferrer">{item.name}</a>
-            <button onClick={() => handleRemove(item.domains)}>Remove</button>
-          </li>
+          <div className="item" key={item.name}>
+            <span className="label">{item.alpha_two_code}</span>
+            <p
+              onClick={() => handleRedirect(item)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link"
+            >
+              {item.name}
+            </p>
+            <button
+              className="removebtn"
+              onClick={() => handleRemove(item.domains)}
+            >
+              Remove
+            </button>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

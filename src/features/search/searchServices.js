@@ -10,7 +10,7 @@ const getCountry = async () => {
 };
 
 const searchService = {
-  getCountry
+  getCountry,
 };
 
 export default searchService;

@@ -13,8 +13,7 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <div>
-      <form class="form-search">
+    <div className="form-search">
         <input
           type="search"
           name="search"
@@ -22,7 +21,6 @@ const SearchBar = ({ onSearch }) => {
           onChange={handleChange}
           placeholder="Enter University Name..."
         />
-      </form>
     </div>
   );
 };

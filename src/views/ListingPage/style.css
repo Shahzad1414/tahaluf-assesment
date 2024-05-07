@@ -1,3 +1,85 @@
-.listing-container{
-   
+.mainContainer {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.listContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+}
+
+.item {
+    flex: 0 1 calc(33.33% - 10px); /* Adjust width based on the number of items per row */
+    max-width: calc(33.33% - 10px); /* Maximum width of each item */
+    margin-bottom: 10px; /* Add margin between items */
+    height: 150px; /* Increased height of the item */
+    border: 1px solid rgb(34, 31, 31);
+    position: relative;
+    display: flex; /* Use flexbox */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Add box shadow */
+    transition: box-shadow 0.3s ease; /* Add transition for box shadow */
+    
+}
+
+.item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Adjusted box shadow on hover */
+}
+
+.label {
+    color: white;
+    background-color: black;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 50px;
+    text-align: center;
+    padding: 5px;
+}
+
+.removebtn {
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    background-color:  #e76060;
+    color: #ffffff;
+    padding: 15px 22px;
+    margin-left: -4px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    opacity: 0; /* Hide the button by default */
+    transition: opacity 0.3s ease; /* Add transition for opacity */
+}
+
+.item:hover .removebtn {
+    opacity: 1; /* Show the button on hover */
+}
+
+.link {
+    text-decoration: none;
+    font-size: 24px;
+    color: black;
+    text-align: center; /* Center the text horizontally */
+    cursor: pointer;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .item {
+        flex: 0 1 calc(50% - 10px); /* Two items per row */
+        max-width: calc(50% - 10px);
+    }
+}
+
+/* Media query for even smaller screens */
+@media (max-width: 480px) {
+    .item {
+        flex: 1 1 100%; /* One item per row */
+        max-width: 100%;
+    }
 }
